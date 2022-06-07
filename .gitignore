@@ -11,3 +11,10 @@ node_modules
 # Generated files
 backstop_data
 dist
+.cache
+.github
+.linthtmlrc.json
+package-lock.json
+package.json
+.bemlintrc.json
+

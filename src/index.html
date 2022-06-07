@@ -4,10 +4,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Board Drag&Drop</title>
-    <link rel="stylesheet" href="./styles/main.scss">
+    <link rel="stylesheet" href="./styles/main.css">
   </head>
-  <body>
+  <body class="body">
     <h1>Test task Drag and drop</h1>
-    <script type="text/javascript" src="scripts/main.js"></script>
+    <!-- <script type="text/javascript" src="scripts/main.js"></script> -->
+    <div class="container">
+      <div class="board"></div>
+      <div class="board"></div>
+    </div>
+    <div id="task"></div>
+
+    <!-- <img src="https://en.js.cx/clipart/soccer-gate.svg" id="gate" class="droppable"> -->
+
+    <script>
+      let currentDroppable = null;
+
+      task.onmousedown = function(event) {
+        let shiftX = event.clientX - task.getBoundingClientRect().left;
+        let shiftY = event.clientY - task.getBoundingClientRect().top;
+
+        task.style.position = 'absolute';
+        task.style.zIndex = 1000;
+        document.body.append(task);
+
+        moveAt(event.pageX, event.pageY);
+
+        function moveAt(pageX, pageY) {
+          task.style.left = pageX - shiftX + 'px';
+          task.style.top = pageY - shiftY + 'px';
+        }
+
+        function onMouseMove(event) {
+          moveAt(event.pageX, event.pageY);
+
+          task.hidden = true;
+          let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
+          task.hidden = false;
+
+          if (!elemBelow) return;
+
+          let droppableBelow = elemBelow.closest('.droppable');
+          if (currentDroppable != droppableBelow) {
+            if (currentDroppable) { // null если мы были не над droppable до этого события
+              // (например, над пустым пространством)
+              leaveDroppable(currentDroppable);
+            }
+            currentDroppable = droppableBelow;
+            if (currentDroppable) { // null если мы не над droppable сейчас, во время этого события
+              // (например, только что покинули droppable)
+              enterDroppable(currentDroppable);
+            }
+          }
+        }
+
+        document.addEventListener('mousemove', onMouseMove);
+
+        task.onmouseup = function() {
+          document.removeEventListener('mousemove', onMouseMove);
+          task.onmouseup = null;
+        }
+
+      }
+
+      function enterDroppable(elem) {
+        elem.style.background = 'pink';
+      }
+
+      function leaveDroppable(elem) {
+        elem.style.background = '';
+      }
+
+      task.ondragstart = function() {
+        return false;
+      }
+    </script>
   </body>
 </html>
