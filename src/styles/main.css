@@ -6,13 +6,7 @@
     rgba(254,168,215,1) 100%
   );
 }
-/*
-8586f2
-c6a5cd
-fea8d7
-ebecf0
-d3d6dd
- */
+
 .container {
   display: flex;
 }
@@ -28,7 +22,6 @@ d3d6dd
 }
 
 #task {
-  /* box-sizing: border-box; */
   width: 220px;
   height: 100px;
   border: 2px solid transparent;

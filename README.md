@@ -1,5 +1,4 @@
 # Base layout template with Gulp, SCSS and Stylelint
-1. 
 1. [DEMO LINK](https://Rom911.github.io/Test_Task_Drag_and_Drop_board/)
 1. Задание на Юниора
 1. Нужно реализовать страницу с функциональностью Трелло Боарда: trello.com

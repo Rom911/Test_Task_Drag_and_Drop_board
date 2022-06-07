@@ -13,9 +13,7 @@
       <div class="board"></div>
       <div class="board"></div>
     </div>
-    <div id="task"></div>
-
-    <!-- <img src="https://en.js.cx/clipart/soccer-gate.svg" id="gate" class="droppable"> -->
+    <div id="task" class="droppable"></div>
 
     <script>
       let currentDroppable = null;
@@ -46,13 +44,11 @@
 
           let droppableBelow = elemBelow.closest('.droppable');
           if (currentDroppable != droppableBelow) {
-            if (currentDroppable) { // null если мы были не над droppable до этого события
-              // (например, над пустым пространством)
+            if (currentDroppable) {
               leaveDroppable(currentDroppable);
             }
             currentDroppable = droppableBelow;
-            if (currentDroppable) { // null если мы не над droppable сейчас, во время этого события
-              // (например, только что покинули droppable)
+            if (currentDroppable) {
               enterDroppable(currentDroppable);
             }
           }
